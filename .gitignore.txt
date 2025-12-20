@@ -1,0 +1,7 @@
+# To są rzeczy, których nie wysyłamy na GitHub:
+.ipynb_checkpoints/
+__pycache__/
+*.log
+
+env/
+venv/

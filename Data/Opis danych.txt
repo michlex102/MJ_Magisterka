@@ -1,0 +1,32 @@
+ax_arrivals -  Activity by individual ICAO hex for all aircraft during one 24-hour period are sub-organized by last two digits of hex code.
+Czyli dane dotyczące przylotów z kodami IACO lotnisk, co powoduje że mogę filtrować drugie źródło po WAW
+
+główny plik dotyczący lotów, zmienne:
+
+hex - Unikalny, 24-bitowy identyfikator transpondera samolotu (adres ICAO), pozwalający na jednoznaczną identyfikację maszyny.
+
+flight - Znak wywoławczy (Callsign) lub numer rejsu (np. LOT123), używany w komunikacji z kontrolą lotów.
+
+category - Kategoria statku powietrznego określająca jego typ lub wielkość turbulencji w śladzie aerodynamicznym (np. Heavy, Light).
+
+lat - Szerokość geograficzna aktualnej pozycji samolotu.
+
+lon - Długość geograficzna aktualnej pozycji samolotu.
+
+alt_baro - Wysokość barometryczna, mierzona na podstawie ciśnienia (standardowa wysokość używana w nawigacji lotniczej).
+
+alt_geom - Wysokość geometryczna, mierzona przez GPS/GNSS (niezależna od ciśnienia, dokładniejsza blisko ziemi).
+
+gs - Prędkość postępowa względem ziemi (Ground Speed) wyrażona w węzłach.
+
+track - Rzeczywisty kąt drogi (kierunek, w którym fizycznie porusza się samolot) w stopniach (0-359).
+
+geom_rate - Prędkość pionowa (wznoszenia lub zniżania) oparta na zmianach wysokości geometrycznej.
+
+track_rate - Szybkość zmiany kąta drogi (szybkość skrętu) wyrażona w stopniach na sekundę.
+
+seen_pos - Czas w sekundach, jaki upłynął od ostatniego odebrania sygnału z pozycją (pozwala ocenić aktualność danych).
+
+snapshot_time - Czas (godzina), dla którego pobrano dany zrzut danych z serwera (zmienna dodana przez skrypt).
+
+distance_km - Wyliczona odległość w kilometrach od punktu referencyjnego (Lotniska Chopina w Warszawie) (zmienna dodana przez skrypt).
