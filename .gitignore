@@ -1,0 +1,17 @@
+# Pliki tymczasowe Pythona
+__pycache__/
+*.pyc
+
+# Środowiska wirtualne
+venv/
+env/
+mgr_clean/
+
+# Śmieci Jupytera
+.ipynb_checkpoints/
+
+
+# Pozostałe pliki z folderu
+
+Data/loty_waw_8_10_20251201.csv
+Instrukcja dla mnie.txt
