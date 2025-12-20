@@ -15,24 +15,24 @@ python -m venv venv
 .\venv\Scripts\activate
 pip install -r requirements.txt
 ```
-2️⃣ Krok 2: Analiza Predykcyjna (Model ML)
+### 2️⃣ Krok 2: Analiza Predykcyjna (Model ML)
 Proces budowy modelu i analizy danych znajduje się w notebooku:
 Ścieżka: Codes/nps_analysis.ipynb
 Opis: Czyszczenie danych NPS, trening modelu, analiza istotności cech (SHAP).
 
-3️⃣ Krok 3: Infrastruktura i Strumieniowanie
+### 3️⃣ Krok 3: Infrastruktura i Strumieniowanie
 Uruchomienie brokera wiadomości Kafka (wymaga zainstalowanego Docker Desktop):
 ```bash
 docker-compose up -d
 ```
 Odpalić kod Flight_Data_Download w celu pobrania danych ze strony 
 
-4️⃣ Krok 4: Symulacja i Dashboard
+### 4️⃣ Krok 4: Symulacja i Dashboard
 W osobnych oknach terminala należy uruchomić:
 python Codes/kafka_producer.py
 streamlit run Codes/dashboard.py
 
-📂 Struktura Repozytorium
+## 📂 Struktura Repozytorium
 Codes/ – notebooki analityczne oraz skrypty systemowe.
 
 Data/ – zbiory danych i słowniki rynkowe.
@@ -41,8 +41,8 @@ requirements.txt – specyfikacja bibliotek Python.
 
 docker-compose.yml – konfiguracja kontenera Kafka.
 
-Autor: Michał Jamroży 113984
+# Autor: Michał Jamroży 113984
 
-Promotor: Michał Bernadelli
+# Promotor: Michał Bernadelli
 
-Uczelnia: Szkoła Główna Handlowa w Warszawie
+# Uczelnia: Szkoła Główna Handlowa w Warszawie
