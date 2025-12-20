@@ -14,7 +14,7 @@ Zaleca się stworzenie izolowanego środowiska wirtualnego:
 python -m venv venv
 .\venv\Scripts\activate
 pip install -r requirements.txt
-
+```
 2️⃣ Krok 2: Analiza Predykcyjna (Model ML)
 Proces budowy modelu i analizy danych znajduje się w notebooku:
 Ścieżka: Codes/nps_analysis.ipynb
@@ -22,8 +22,9 @@ Opis: Czyszczenie danych NPS, trening modelu, analiza istotności cech (SHAP).
 
 3️⃣ Krok 3: Infrastruktura i Strumieniowanie
 Uruchomienie brokera wiadomości Kafka (wymaga zainstalowanego Docker Desktop):
+```bash
 docker-compose up -d
-
+```
 Odpalić kod Flight_Data_Download w celu pobrania danych ze strony 
 
 4️⃣ Krok 4: Symulacja i Dashboard
