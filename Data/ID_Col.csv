@@ -1,0 +1,100 @@
+﻿Name;Usability;Model;Description
+Survey ID;użyteczna;No;Do sprawdzania danych pojedynczych pax
+Local Response Date;ciekawa;No;Do sprawdzenia z jakiego dokładnie czasu są nasze dane
+Booking ID;bezużyteczna;No;Narusza prywatność
+Customer ID;bezużyteczna;No;Narusza prywatność
+PNR;bezużyteczna;No;Narusza prywatność
+Delay (Flight 1);kluczowa;Maybe;Kluczowa do zmierzenia opóźnienia
+Delay (Flight 2);kluczowa;Maybe;Kluczowa do zmierzenia opóźnienia
+Delay Reason (Flight 1);bezużyteczna;No;Bez sensu w tej analizie
+Delay Reason (Flight 2);bezużyteczna;No;Bez sensu w tej analizie
+Booking channel;bezużyteczna;No;Bez sensu w tej analizie
+Booking window;bezużyteczna;No;Bez sensu w tej analizie
+O/I Flag;bezużyteczna;No;Bez sensu w tej analizie
+Weekday (Flight 1);bezużyteczna;No;Bez sensu w tej analizie
+Flight number (Flight 1);bezużyteczna;No;Bez sensu w tej analizie
+Flight number (Flight 2);bezużyteczna;No;Bez sensu w tej analizie
+Origin (Flight 1);bezużyteczna;No;Bez sensu w tej analizie
+Destination (Flight 1);bezużyteczna;No;Bez sensu w tej analizie
+Origin (Flight 2);bezużyteczna;No;Bez sensu w tej analizie
+Destination (Flight 2);bezużyteczna;No;Bez sensu w tej analizie
+Trip Type;bezużyteczna;No;Bez sensu w tej analizie
+Stay Length;bezużyteczna;No;Bez sensu w tej analizie
+Range (Flight 1);użyteczna;Maybe;Do wydzielenia efektu dalekiej podróży
+Range (Flight 2);użyteczna;Maybe;Do wydzielenia efektu dalekiej podróży
+Cabin Class (Flight 1);użyteczna;Maybe;Do wydzielenia efektu klasy serwisowej
+Cabin Class (Flight 2);użyteczna;Maybe;Do wydzielenia efektu klasy serwisowej
+RBD type (Flight 1);bezużyteczna;No;Bez sensu w tej analizie
+RBD type (Flight 2);bezużyteczna;No;Bez sensu w tej analizie
+Aircraft type (Flight 1);bezużyteczna;No;Bez sensu w tej analizie (brak danych o danej jednostce)
+Aircraft type (Flight 2);bezużyteczna;No;Bez sensu w tej analizie (brak danych o danej jednostce)
+Aircraft Registration (Flight 1);bezużyteczna;No;Bez sensu w tej analizie
+Aircraft Registration (Flight 2);bezużyteczna;No;Bez sensu w tej analizie
+M&M Flag;użyteczna;Yes;Czy przynależność do miles and more niebezpośrednio wpływa na satysfakcje?
+M&M Status;bezużyteczna;No;Bez sensu w tej analizie, narusza prywatność
+Gender;bezużyteczna;No;Prowadzi do Biasu/tylko null w danych
+No. of Adults;bezużyteczna;No;Prowadzi do Biasu
+No. of Children;bezużyteczna;No;Prowadzi do Biasu
+No. of Infants;bezużyteczna;No;Prowadzi do Biasu
+No. of Pax in Reservation;ciekawa;Maybe;Czy podróżownanie w grupie zwiększa satysfakcje
+Country;wrażliwa;No;Prowadzi do Biasu
+Transfer Flag;kluczowa;Yes;Kluczowa do zmierzenia czy sam Transfer powoduje zmiane satysfakcji, oraz oddzielenie tych którzy maja blank na 2 locie
+Departure date (Flight 1);bezużyteczna;No;Bez sensu w tej analizie
+Departure date (Flight 2);bezużyteczna;No;Bez sensu w tej analizie
+Arrival date (Flight 1);bezużyteczna;No;Bez sensu w tej analizie
+Arrival date (Flight 2);bezużyteczna;No;Bez sensu w tej analizie
+Departure hour (Flight 1);bezużyteczna;No;Bez sensu w tej analizie
+Departure hour (Flight 2);bezużyteczna;No;Bez sensu w tej analizie
+Arrival hour (Flight 1);bezużyteczna;No;Bez sensu w tej analizie
+Arrival hour (Flight 2);bezużyteczna;No;Bez sensu w tej analizie
+Fligth 1 IFE Flag;użyteczna;Yes;Kluczowa do oddzielenia blanków
+Flight 2 IFE Flag;użyteczna;Yes;Kluczowa do oddzielenia blanków
+NPS;kluczowa;Maybe;Zmienna Celu
+Overall journey satisfaction;bezużyteczna;No;Bez sensu w tej analizie
+NPS & OSAT comment;kluczowa;Maybe;DO analizy sentymentu wspierającej decyzje z NPS
+Topics Tagged Original;bezużyteczna;No;Bez sensu w tej analizie
+Check-in method (Declarative);użyteczna;Maybe;czy sposób check inu wpływa na satysfakcje
+Check-in;kluczowa;Yes;Dużo blank, chyba błąd
+Boarding at origin airport;kluczowa;Yes;Cząstkowa
+Security check;kluczowa;Yes;Cząstkowa
+Gate experience at origin airport;kluczowa;Yes;Cząstkowa
+Business lounge visited (WAW);bezużyteczna;No;Bez sensu w tej analizie
+Business Lounge at WAW (Warsaw);użyteczna;Maybe;Będzie użyte do uśrednienia z Chicago
+Business Lounge at ORD (Chicago);użyteczna;Maybe;Będzie użyte do uśrednienia z Warszawą
+Transfer between flights;kluczowa;Yes;Cząstkowa
+Baggage claim;kluczowa;Yes;Cząstkowa
+Airport experience comment;bezużyteczna;No;Bez sensu w tej analizie
+Overall flight satisfaction (Flight 1);bezużyteczna;No;Bez sensu w tej analizie
+Punctuality - F1;kluczowa;Yes;Cząstkowa
+Cabin crew service - F1;kluczowa;Yes;Cząstkowa
+Food & Beverage - F1;kluczowa;Yes;Cząstkowa
+In-flight entertainment - F1;kluczowa;Yes;Cząstkowa
+Cleanliness - F1;kluczowa;Yes;Cząstkowa
+Overall comfort onboard - F1;kluczowa;Yes;Cząstkowa
+Your seat - F1;kluczowa;Yes;Cząstkowa
+Leg room - F1;kluczowa;Yes;Cząstkowa
+Space for hand luggage - F1;kluczowa;Yes;Cząstkowa
+Temperature of the cabin - F1;kluczowa;Yes;Cząstkowa
+Complementary accessories onboard - F1;uzyteczna;Yes;Cząstkowa, dużo blank, prawodpodobnie tylko dla Business/Premium na LH
+Flight comment - F1;bezużyteczna;No;Bez sensu w tej analizie
+Travel comfort comment - F1;bezużyteczna;Yes;Ze względu na jedtnie 14 rekordów bez NULL
+Overall flight satisfaction (Flight 2);bezużyteczna;No;Bez sensu w tej analizie
+Punctuality - F2;kluczowa;Yes;Cząstkowa
+Cabin crew service - F2;kluczowa;Yes;Cząstkowa
+Food & Beverage - F2;kluczowa;Yes;Cząstkowa
+Cleanliness - F2;kluczowa;Yes;Cząstkowa
+In-flight entertainment - F2;kluczowa;Yes;Cząstkowa
+Flight comment - F2;bezużyteczna;No;Bez sensu w tej analizie
+Overall comfort onboard - F2;kluczowa;Yes;Cząstkowa
+Your seat - F2;kluczowa;Yes;Cząstkowa
+Leg room - F2;kluczowa;Yes;Cząstkowa
+Space for hand luggage - F2;kluczowa;Yes;Cząstkowa
+Temperature of the cabin - F2;kluczowa;Yes;Cząstkowa
+Complementary accessories onboard - F2;uzyteczna;Yes;Cząstkowa, dużo blank, prawodpodobnie tylko dla Business/Premium na LH
+Travel comfort comment - F2;bezużyteczna;No;Ze względu na jedtnie 12 rekordów bez NULL
+Age of the Passenger;wrażliwa;No;Prowadzi do Biasu
+Purpose of trip;użyteczna;Yes;Kategorialna, Business/Leasure
+Purpose of Trip - Comment;bezużyteczna;No;Bez sensu w tej analizie
+Survey language;wrażliwa;No;Do wykrycia z jakiego słownika ma korzystać analiza sentymantu (nie zawsze poprawne to jest)
+Passenger country of Residence;bezużyteczna;No;Bez sensu w tej analizie
+LOT travel frequency;kluczowa;Yes;Kategorialna, czy stali pax są bardziej zadowoleni?

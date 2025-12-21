@@ -10,9 +10,10 @@ mgr_clean/
 # Śmieci Jupytera
 .ipynb_checkpoints/
 
+# Pliki tymczasowe Excela
+~$*
 
 # Pozostałe pliki z folderu
-
 Data/loty_waw_8_10_20251201.csv
 Instrukcja dla mnie.txt
-Data/NPS_2025.xlsx
+Data/NPS_2025.csv
