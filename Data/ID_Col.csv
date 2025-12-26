@@ -70,7 +70,7 @@ Cabin crew service - F1;kluczowa;Yes;Cząstkowa
 Food & Beverage - F1;kluczowa;Yes;Cząstkowa
 In-flight entertainment - F1;kluczowa;Yes;Cząstkowa
 Cleanliness - F1;kluczowa;Yes;Cząstkowa
-Overall comfort onboard - F1;kluczowa;Yes;Cząstkowa
+Overall comfort onboard - F1;bezużyteczna;No;Cząstkowa
 Your seat - F1;kluczowa;Yes;Cząstkowa
 Leg room - F1;kluczowa;Yes;Cząstkowa
 Space for hand luggage - F1;kluczowa;Yes;Cząstkowa
@@ -85,7 +85,7 @@ Food & Beverage - F2;kluczowa;Yes;Cząstkowa
 Cleanliness - F2;kluczowa;Yes;Cząstkowa
 In-flight entertainment - F2;kluczowa;Yes;Cząstkowa
 Flight comment - F2;bezużyteczna;No;Bez sensu w tej analizie
-Overall comfort onboard - F2;kluczowa;Yes;Cząstkowa
+Overall comfort onboard - F2;bezużyteczna;No;Cząstkowa
 Your seat - F2;kluczowa;Yes;Cząstkowa
 Leg room - F2;kluczowa;Yes;Cząstkowa
 Space for hand luggage - F2;kluczowa;Yes;Cząstkowa
