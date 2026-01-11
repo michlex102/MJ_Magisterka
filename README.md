@@ -1,48 +1,53 @@
-## 🎯 Cel projektu
-Projekt badawczy realizowany w ramach pracy magisterskiej, mający na celu stworzenie systemu wsparcia decyzji operacyjnych dla portu lotniczego Warszawa-Okęcie (WAW). System integruje dane o pozycjach samolotów (ADS-B) z analizą satysfakcji pasażerów oraz ich znaczeniem rynkowym (wskaźnik HHI).
+# Praca Magisterska: Analiza czynników determinujących niezadowolenie pasażerów oraz wspomaganie procesów operacyjnych
 
----
+## Przegląd Projektu
+Niniejsze repozytorium zawiera kod źródłowy oraz dokumentację techniczną projektu realizowanego w ramach pracy magisterskiej pt.: "Analiza czynników determinujących niezadowolenie pasażerów oraz wspomaganie procesów operacyjnych w celu poprawy wskaźnika NPS w linii lotniczej".
 
-## 👨‍🏫 Instrukcja dla Promotora
+Projekt składa się z dwóch integralnych części:
+1.  **Analiza ML i XAI:** Pipeline przetwarzania danych ankietowych (NPS), imputacji braków oraz trenowania modeli klasyfikacyjnych (Random Forest, XGBoost, Sieci Neuronowe) w celu identyfikacji przyczyn niezadowolenia pasażerów. Wykorzystano metody interpretowalności modeli (SHAP).
+2.  **Dashboard Operacyjny (Real-Time):** Prototyp systemu wspierania decyzji dla działu Disruption Management. System wykorzystuje Apache Kafka do symulacji strumieniowania danych w czasie rzeczywistym (na bazie ADS-B) oraz framework Streamlit do wizualizacji i priorytetyzacji lotów wysokiego ryzyka.
 
-Poniżej znajduje się ścieżka uruchomienia poszczególnych modułów systemu:
+## Struktura Repozytorium
 
-### 1️⃣ Krok 1: Przygotowanie środowiska
-Zaleca się stworzenie izolowanego środowiska wirtualnego:
+### Folder Codes
+Folder zawiera skrypty Python podzielone według funkcjonalności:
 
-```bash
-python -m venv venv
-.\venv\Scripts\activate
-pip install -r requirements.txt
-```
-### 2️⃣ Krok 2: Analiza Predykcyjna (Model ML)
-Proces budowy modelu i analizy danych znajduje się w notebooku:
-Ścieżka: Codes/nps_analysis.ipynb
-Opis: Czyszczenie danych NPS, trening modelu, analiza istotności cech (SHAP).
+* **NPS Main.ipynb**
+    Główny potok przetwarzania danych (pipeline). Obejmuje wczytanie surowych danych, czyszczenie, obsługę braków danych (kNN dla braków losowych MAR, imputacja średnią dla braków strukturalnych), analizę korelacji oraz podział na zbiory treningowe, walidacyjne i testowe.
 
-### 3️⃣ Krok 3: Infrastruktura i Strumieniowanie
-Uruchomienie brokera wiadomości Kafka (wymaga zainstalowanego Docker Desktop):
-```bash
-docker-compose up -d
-```
-Odpalić kod Flight_Data_Download w celu pobrania danych ze strony 
+* **NPS Analysis.ipynb**
+    Część analityczno-modelowa. Zawiera trening modeli (Drzewa Decyzyjne, Random Forest, XGBoost, Sieci Neuronowe), ewaluację wyników oraz szczegółową analizę XAI (SHAP) identyfikującą kluczowe czynniki wpływające na detrakcję (np. wpływ procesu transferowego na lotach Long Haul).
 
-### 4️⃣ Krok 4: Symulacja i Dashboard
-W osobnych oknach terminala należy uruchomić:
-python Codes/kafka_producer.py
-streamlit run Codes/dashboard.py
+* **NPS-Sentyment.ipynb**
+    Moduł NLP (Natural Language Processing). Wykorzystuje model XLM-RoBERTa do analizy sentymentu komentarzy pasażerów w celu identyfikacji tzw. "Silent Detractors" (osób z oceną neutralną, ale negatywnym komentarzem).
 
-## 📂 Struktura Repozytorium
-Codes/ – notebooki analityczne oraz skrypty systemowe.
+* **Dashboard.py**
+    Kod aplikacji wizualizacyjnej opartej na bibliotece Streamlit. Odpowiada za odbieranie danych z Kafki, wizualizację pozycji samolotów na mapie oraz obliczanie priorytetów biznesowych dla lotów zagrożonych.
 
-Data/ – zbiory danych i słowniki rynkowe.
+* **Flight_Data_Download.py**
+    Skrypt pomocniczy służący do pobierania historycznych danych ADS-B z serwisu ADS-B Exchange, wykorzystywanych następnie do symulacji.
 
-requirements.txt – specyfikacja bibliotek Python.
+* **test_producer.py**
+    Symulator producenta danych (Kafka Producer). Odczytuje historyczny plik CSV z danymi lotniczymi i wysyła je do tematu Kafki w pętlach czasowych, symulując napływ danych z transponderów w czasie rzeczywistym.
 
-docker-compose.yml – konfiguracja kontenera Kafka.
+* **test_consumer.py**
+    Skrypt testowy konsumenta (Kafka Consumer), służący do weryfikacji poprawności odbierania komunikatów przed uruchomieniem pełnego Dashboardu.
 
-# Autor: Michał Jamroży 113984
+### Folder Data
+Folder zawiera zbiory danych oraz pliki metadanych.
+*Uwaga: Część danych handlowych oraz surowe dane osobowe zostały usunięte z repozytorium ze względu na umowy o poufności (NDA).*
 
-# Promotor: Michał Bernadelli
+* **NPS_final/**: Katalog z przetworzonymi zbiorami gotowymi do modelowania (X_train, y_train, X_val, etc.).
+* **ax_arrivals_20251201.csv**: Zbiór pomocniczy identyfikujący porty początkowe i docelowe dla filtrowania danych ADS-B.
+* **ID_Col.xlsx**: Plik konfiguracyjny z flagami zmiennych, służący do wstępnej filtracji cech ze zbioru NPS.
+* **loty_waw_8_23_20251201.csv**: Próbka danych ADS-B (loty dolatujące do WAW, 1 grudnia 2025, godz. 08:00-23:00) stanowiąca wsad do symulacji Real-Time.
+* **NPS_2025 opis kolumn**: Dokumentacja zmiennych występujących w ankiecie NPS.
+* **nps_sentiment_results.csv**: Wynik działania modułu NLP, zawierający flagi sentymentu dla poszczególnych rekordów.
 
-# Uczelnia: Szkoła Główna Handlowa w Warszawie
+### Pliki w katalogu głównym
+* **docker-compose.yml**: Plik konfiguracyjny infrastruktury Docker. Definiuje usługi Zookeeper oraz Apache Kafka niezbędne do uruchomienia warstwy przesyłu danych.
+* **.gitignore**: Lista plików i folderów ignorowanych przez system kontroli wersji.
+
+
+## Zastrzeżenie prawne (Disclaimer)
+Repozytorium zawiera kod stworzony na potrzeby pracy dyplomowej. Dane wykorzystane w projekcie (w szczególności dane handlowe i ankietowe) zostały zanonimizowane lub są prezentowane w formie zagregowanej, aby nie naruszać tajemnicy przedsiębiorstwa oraz umów o poufności (NDA).

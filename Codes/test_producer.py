@@ -21,18 +21,18 @@ def run_producer():
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     data_path = os.path.join(base_dir, 'data', CSV_FILENAME)
 
-    print(f"📂 Szukam danych w: {data_path}")
+    print(f"Szukam danych w: {data_path}")
 
     if not os.path.exists(data_path):
-        print("❌ BŁĄD: Nie znaleziono pliku! Sprawdź folder 'data' i nazwę pliku.")
+        print("BŁĄD: Nie znaleziono pliku! Sprawdź folder 'data' i nazwę pliku.")
         return
 
     # 2. Wczytanie danych
-    print("⏳ Wczytuję i przetwarzam dane...")
+    print("Wczytuję i przetwarzam dane...")
     try:
         df = pd.read_csv(data_path)
     except Exception as e:
-        print(f"❌ Błąd odczytu: {e}")
+        print(f"Błąd odczytu: {e}")
         return
 
     # 3. Sortowanie danych po czasie (dla pewności)
@@ -40,7 +40,7 @@ def run_producer():
     if 'snapshot_time' in df.columns:
         df = df.sort_values(by='snapshot_time')
     else:
-        print("❌ BŁĄD: Nie znaleziono kolumny 'snapshot_time' w pliku CSV!")
+        print("BŁĄD: Nie znaleziono kolumny 'snapshot_time' w pliku CSV!")
         print(f"   Dostępne kolumny: {list(df.columns)}")
         return
 
@@ -48,8 +48,8 @@ def run_producer():
     # To jest kluczowy moment - tworzymy grupy wierszy o tym samym czasie
     grouped_packets = df.groupby('snapshot_time')
 
-    print(f"✅ Znaleziono {len(grouped_packets)} unikalnych paczek czasowych (snapshotów).")
-    print(f"🚀 Start symulacji (Speed: {SPEED_FACTOR}x, Interwał bazowy: 5s)")
+    print(f"Znaleziono {len(grouped_packets)} unikalnych paczek czasowych (snapshotów).")
+    print(f"Start symulacji (Speed: {SPEED_FACTOR}x, Interwał bazowy: 5s)")
     print("   (Ctrl+C aby zatrzymać)")
 
     try:
@@ -68,7 +68,7 @@ def run_producer():
             # Wymuszamy wysłanie bufora (żeby poleciało natychmiast)
             producer.flush()
             
-            print(f" -> 📦 Paczka {timestamp}: Wysłano {record_count} lotów.")
+            print(f" -> Paczka {timestamp}: Wysłano {record_count} lotów.")
 
             # --- OCZEKIWANIE NA KOLEJNĄ PACZKĘ ---
             # Skoro dane są co 5 sekund, to czekamy 5 sekund (podzielone przez przyspieszenie)
@@ -76,7 +76,7 @@ def run_producer():
             time.sleep(wait_time)
 
     except KeyboardInterrupt:
-        print("\n🛑 Zatrzymano symulację.")
+        print("\n Zatrzymano symulację.")
     finally:
         producer.close()
 

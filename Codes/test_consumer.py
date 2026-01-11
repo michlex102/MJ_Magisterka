@@ -6,7 +6,7 @@ import sys
 TOPIC_NAME = 'flight-positions'
 GROUP_ID = 'testowa_grupa_konsumencka_v2' # Zmieniłem ID, żeby czytał od początku
 
-print("📡 [KONSUMENT] Uruchamianie monitora lotów...")
+print("[KONSUMENT] Uruchamianie monitora lotów...")
 print(f"   Nasłuchuję tematu: '{TOPIC_NAME}'")
 print("   Wciśnij Ctrl+C, aby zakończyć.\n")
 
@@ -20,10 +20,10 @@ try:
         value_deserializer=lambda x: json.loads(x.decode('utf-8'))
     )
 except Exception as e:
-    print(f"❌ Błąd połączenia z Kafką: {e}")
+    print(f"Błąd połączenia z Kafką: {e}")
     sys.exit(1)
 
-print("✅ Połączono! Czekam na pakiety danych...\n")
+print("Połączono! Czekam na pakiety danych...\n")
 
 counter = 0
 
@@ -58,14 +58,14 @@ try:
         # Używamy f-string z formatowaniem szerokości (np. <10), żeby tabelka była równa
         print(
             f"[{counter:04d}] "
-            f"🕒 {time_stamp} | "
-            f"✈️ {identyfikator:<8} | "
-            f"📍 {lat:.4f}, {lon:.4f} | "
-            f"🏔️ {alt:>5} ft | "
-            f"🚀 {speed_knots:>3.0f} kts | "
-            f"📏 {dist_km:>5.1f} km od WAW"
+            f"{time_stamp} | "
+            f"{identyfikator:<8} | "
+            f"{lat:.4f}, {lon:.4f} | "
+            f"{alt:>5} ft | "
+            f"{speed_knots:>3.0f} kts | "
+            f"{dist_km:>5.1f} km od WAW"
         )
 
 except KeyboardInterrupt:
-    print("\n🛑 Zatrzymano Konsumenta.")
+    print("\n Zatrzymano Konsumenta.")
     consumer.close()

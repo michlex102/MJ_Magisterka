@@ -5,7 +5,7 @@ import json
 import time
 import pydeck as pdk 
 
-# --- 1. KONFIGURACJA STRONY ---
+# --- KONFIGURACJA STRONY ---
 st.set_page_config(
     page_title="Radar Lotniczy Live",
     layout="wide",
@@ -19,10 +19,9 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.title("📡 System Monitorowania Lotów (Real-Time)")
+st.title("System Monitorowania Lotów (Real-Time)")
 
-# --- 2. TWORZENIE SLOTÓW (PLACEHOLDERS) ---
-# To jest KLUCZOWE. Tworzymy puste miejsca RAZ, przed pętlą.
+# --- TWORZENIE SLOTÓW  ---
 
 # Kontener na metryki
 metrics_container = st.container()
@@ -41,7 +40,7 @@ with col4:
 # Slot na mapę (pod spodem)
 map_placeholder = st.empty()
 
-# --- 3. POŁĄCZENIE Z KAFKĄ ---
+# --- POŁĄCZENIE Z KAFKĄ ---
 TOPIC_NAME = 'flight-positions'
 GROUP_ID = 'streamlit_dashboard_final_v1' # Nowa grupa dla pewności
 
@@ -65,11 +64,11 @@ consumer = init_consumer()
 if not consumer:
     st.stop()
 
-# --- 4. STAN APLIKACJI ---
+# --- STAN APLIKACJI ---
 if 'flights_data' not in st.session_state:
     st.session_state['flights_data'] = {}
 
-# --- 5. NIESKOŃCZONA PĘTLA ---
+# --- NIESKOŃCZONA PĘTLA ---
 try:
     while True:
         raw_msgs = consumer.poll(timeout_ms=500)
@@ -92,7 +91,7 @@ try:
             if 'lon' in df.columns:
                 df['lon'] = pd.to_numeric(df['lon'], errors='coerce')
 
-            # --- KOLOROWANIE (NOWOŚĆ) ---
+            # --- KOLOROWANIE---
             # Funkcja decydująca o kolorze: [R, G, B, A]
             def get_color(row):
                 # Jeśli wysokość to NaN (czyli było "ground") lub 0 -> CZERWONY
