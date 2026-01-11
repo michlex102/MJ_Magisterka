@@ -5,14 +5,12 @@ import json
 import time
 import pydeck as pdk 
 
-# --- KONFIGURACJA STRONY ---
 st.set_page_config(
     page_title="Radar Lotniczy Live",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# Style CSS
 st.markdown("""
     <style>
     .block-container { padding-top: 1rem; padding-bottom: 0rem; }
@@ -21,14 +19,12 @@ st.markdown("""
 
 st.title("System Monitorowania Lotów (Real-Time)")
 
-# --- TWORZENIE SLOTÓW  ---
 
 # Kontener na metryki
 metrics_container = st.container()
 col1, col2, col3, col4 = metrics_container.columns(4)
 
 with col1:
-    # Rezerwujemy puste miejsce i nazywamy je 'kpi1_slot'
     kpi1_slot = st.empty()
 with col2:
     kpi2_slot = st.empty()
@@ -40,7 +36,7 @@ with col4:
 # Slot na mapę (pod spodem)
 map_placeholder = st.empty()
 
-# --- POŁĄCZENIE Z KAFKĄ ---
+# Połączenie z kafką
 TOPIC_NAME = 'flight-positions'
 GROUP_ID = 'streamlit_dashboard_final_v1' # Nowa grupa dla pewności
 
@@ -64,11 +60,9 @@ consumer = init_consumer()
 if not consumer:
     st.stop()
 
-# --- STAN APLIKACJI ---
 if 'flights_data' not in st.session_state:
     st.session_state['flights_data'] = {}
 
-# --- NIESKOŃCZONA PĘTLA ---
 try:
     while True:
         raw_msgs = consumer.poll(timeout_ms=500)
@@ -80,10 +74,8 @@ try:
                     plane_id = new_data.get('hex') or new_data.get('flight')
                     st.session_state['flights_data'][plane_id] = new_data
 
-            # Konwersja na DataFrame
             df = pd.DataFrame(st.session_state['flights_data'].values())
 
-            # --- CZYSZCZENIE DANYCH ---
             if 'alt_baro' in df.columns:
                 df['alt_baro'] = pd.to_numeric(df['alt_baro'], errors='coerce')
             if 'lat' in df.columns:
@@ -91,11 +83,10 @@ try:
             if 'lon' in df.columns:
                 df['lon'] = pd.to_numeric(df['lon'], errors='coerce')
 
-            # --- KOLOROWANIE---
             # Funkcja decydująca o kolorze: [R, G, B, A]
             def get_color(row):
                 # Jeśli wysokość to NaN (czyli było "ground") lub 0 -> CZERWONY
-                # Sprawdzamy też kolumnę 'on_ground' jeśli istnieje w danych
+                # Sprawdzenie kolumny 'on_ground' jeśli istnieje w danych
                 is_ground = False
                 
                 if 'on_ground' in row and str(row['on_ground']).lower() == 'true':
@@ -108,15 +99,12 @@ try:
                 return [0, 255, 0, 160]      # Zielony
 
             if not df.empty:
-                # Tworzymy nową kolumnę 'fill_color' dla każdego samolotu
                 df['fill_color'] = df.apply(get_color, axis=1)
 
-            # --- OBLICZENIA ---
             total_planes = len(df)
             last_time = df['snapshot_time'].max() if not df.empty and 'snapshot_time' in df.columns else "---"
             avg_alt = df['alt_baro'].mean() if not df.empty and 'alt_baro' in df.columns else 0
 
-            # --- AKTUALIZACJA UI ---
             kpi1_slot.metric("Aktywne samoloty", total_planes)
             kpi2_slot.metric("Czas symulacji", str(last_time))
             kpi3_slot.metric("Średnia wys. [ft]", f"{avg_alt:.0f}")
@@ -135,7 +123,7 @@ try:
                     pickable=True
                 )
 
-                # Ustawienia widoku (tło CARTO Dark Matter)
+                # Ustawienia widoku
                 view_state = pdk.ViewState(
                     latitude=52.0693, longitude=19.4803, zoom=5.5, pitch=0
                 )
@@ -147,8 +135,6 @@ try:
                     tooltip={"text": "Lot: {flight}\nHeks: {hex}\nWys: {alt_baro} ft"}
                 )
                 
-                # use_container_width=True -> Rozciągnij na całą szerokość
-                # height=800 -> Ustaw wysokość na 800 pikseli (lub więcej, np. 900)
                 map_placeholder.pydeck_chart(r, use_container_width=True, height=800)
 
         else:

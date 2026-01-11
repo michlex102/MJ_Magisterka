@@ -1,0 +1,37 @@
+# --- Aplikacja (Dashboard) i Streaming ---
+streamlit
+kafka-python
+pydeck
+watchdog
+
+# --- Przetwarzanie Danych i Obliczenia ---
+pandas
+numpy
+geopy
+tqdm
+requests
+
+# --- Statystyka i Testy ---
+statsmodels
+
+# --- Machine Learning i XAI---
+scikit-learn
+xgboost
+shap
+yellowbrick
+
+# --- Deep Learning (Modele Neuronowe) ---
+tensorflow
+torch
+
+# --- NLP i Analiza Sentymentu ---
+transformers==4.46.3
+langdetect
+sentencepiece
+protobuf
+
+# --- Wizualizacja i Analiza (Jupyter) ---
+matplotlib
+seaborn
+jupyter
+ipykernel

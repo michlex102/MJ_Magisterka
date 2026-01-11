@@ -4,10 +4,9 @@ import json
 import time
 import os
 
-# --- KONFIGURACJA ---
+
 SPEED_FACTOR = 1.0       # 1.0 = czas rzeczywisty (czeka 5s), 10.0 = 10x szybciej (czeka 0.5s)
 TOPIC_NAME = 'flight-positions'
-# Upewnij się, że nazwa pliku jest poprawna (z rozszerzeniem .csv)
 CSV_FILENAME = 'loty_waw_8_10_20251201.csv' 
 
 # Inicjalizacja Producenta
@@ -17,7 +16,6 @@ producer = KafkaProducer(
 )
 
 def run_producer():
-    # 1. Ścieżka do pliku
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     data_path = os.path.join(base_dir, 'data', CSV_FILENAME)
 
@@ -27,7 +25,6 @@ def run_producer():
         print("BŁĄD: Nie znaleziono pliku! Sprawdź folder 'data' i nazwę pliku.")
         return
 
-    # 2. Wczytanie danych
     print("Wczytuję i przetwarzam dane...")
     try:
         df = pd.read_csv(data_path)
@@ -35,8 +32,7 @@ def run_producer():
         print(f"Błąd odczytu: {e}")
         return
 
-    # 3. Sortowanie danych po czasie (dla pewności)
-    # Zakładam, że kolumna nazywa się dokładnie 'snapshot_time'
+    # 3. Sortowanie danych po czasie
     if 'snapshot_time' in df.columns:
         df = df.sort_values(by='snapshot_time')
     else:
@@ -44,8 +40,7 @@ def run_producer():
         print(f"   Dostępne kolumny: {list(df.columns)}")
         return
 
-    # 4. Grupowanie w "Paczki Danych"
-    # To jest kluczowy moment - tworzymy grupy wierszy o tym samym czasie
+    # Grupowanie w paczki danych
     grouped_packets = df.groupby('snapshot_time')
 
     print(f"Znaleziono {len(grouped_packets)} unikalnych paczek czasowych (snapshotów).")
@@ -58,19 +53,17 @@ def run_producer():
             
             start_process = time.time()
             record_count = len(packet_df)
-            
-            # --- WYSYŁANIE PACZKI ---
+
+            # wysyłanie paczki
             # Iterujemy po wszystkich samolotach w tym jednym snapshocie
             for _, row in packet_df.iterrows():
                 message = row.to_dict()
                 producer.send(TOPIC_NAME, value=message)
             
-            # Wymuszamy wysłanie bufora (żeby poleciało natychmiast)
             producer.flush()
             
             print(f" -> Paczka {timestamp}: Wysłano {record_count} lotów.")
 
-            # --- OCZEKIWANIE NA KOLEJNĄ PACZKĘ ---
             # Skoro dane są co 5 sekund, to czekamy 5 sekund (podzielone przez przyspieszenie)
             wait_time = 5.0 / SPEED_FACTOR
             time.sleep(wait_time)
