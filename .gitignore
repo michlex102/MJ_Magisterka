@@ -8,8 +8,7 @@ env/
 mgr_clean/
 
 # Śmieci Jupytera
-.ipynb_checkpoints/
-Codes/.ipynb_checkpoints/
+.ipynb_checkpoints
 
 # Pliki tymczasowe Excela
 ~$*
