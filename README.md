@@ -47,7 +47,3 @@ Folder zawiera zbiory danych oraz pliki metadanych.
 ### Pliki w katalogu głównym
 * **docker-compose.yml**: Plik konfiguracyjny infrastruktury Docker. Definiuje usługi Zookeeper oraz Apache Kafka niezbędne do uruchomienia warstwy przesyłu danych.
 * **.gitignore**: Lista plików i folderów ignorowanych przez system kontroli wersji.
-
-
-## Zastrzeżenie prawne (Disclaimer)
-Repozytorium zawiera kod stworzony na potrzeby pracy dyplomowej. Dane wykorzystane w projekcie (w szczególności dane handlowe i ankietowe) zostały zanonimizowane lub są prezentowane w formie zagregowanej, aby nie naruszać tajemnicy przedsiębiorstwa oraz umów o poufności (NDA).
