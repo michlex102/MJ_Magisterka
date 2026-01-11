@@ -1,7 +1,7 @@
 # Praca Magisterska: Analiza czynników determinujących niezadowolenie pasażerów oraz wspomaganie procesów operacyjnych
 
 ## Przegląd Projektu
-Niniejsze repozytorium zawiera kod źródłowy oraz dokumentację techniczną projektu realizowanego w ramach pracy magisterskiej pt.: "Analiza czynników determinujących niezadowolenie pasażerów oraz wspomaganie procesów operacyjnych w celu poprawy wskaźnika NPS w linii lotniczej".
+Niniejsze repozytorium zawiera kod źródłowy projektu realizowanego w ramach pracy magisterskiej pod tytułem roboczym.: "Analiza czynników determinujących niezadowolenie pasażerów oraz wspomaganie procesów operacyjnych w celu poprawy wskaźnika NPS w linii lotniczej".
 
 Projekt składa się z dwóch integralnych części:
 1.  **Analiza ML i XAI:** Pipeline przetwarzania danych ankietowych (NPS), imputacji braków oraz trenowania modeli klasyfikacyjnych (Random Forest, XGBoost, Sieci Neuronowe) w celu identyfikacji przyczyn niezadowolenia pasażerów. Wykorzystano metody interpretowalności modeli (SHAP).
